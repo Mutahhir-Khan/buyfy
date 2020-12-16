@@ -5,8 +5,16 @@ import Authentication from "./Pages/Authentication/Authentication";
 import Category from "./Pages/Category/Category";
 import CategoryProducts from "./Pages/CategoryProducts/CategoryProducts";
 import Checkout from "./Pages/Checkout/Checkout";
+import { useEffect } from "react";
+import { connect } from 'react-redux';
+import { authListener } from './Redux/authRedux/authActions';
 
-var App = () => {
+
+var App = ({authListener}) => {
+  useEffect(() => {
+    authListener()
+    
+  }, [authListener])
   return (
     <Switch>
       <Route exact path="/" component={Home} />
@@ -18,4 +26,8 @@ var App = () => {
   );
 };
 
-export default App;
+var actions = {
+  authListener
+}
+
+export default connect(null, actions)(App);

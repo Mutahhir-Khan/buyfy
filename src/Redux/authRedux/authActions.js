@@ -1,4 +1,9 @@
-import { auth, firestore, serverTimestamp } from "./../../Firebase/Firebase";
+import {
+  auth,
+  firestore,
+  googleAuthProvider,
+  serverTimestamp,
+} from "./../../Firebase/Firebase";
 import { REMOVE_USER, SET_USER } from "./authConstants";
 
 //functions move to reducer
@@ -27,12 +32,6 @@ export var signup = ({ email, password, fullName }) => async (dispatch) => {
     // console.log(userInfo)
     await firestore.collection("users").doc(uid).set(userInfo);
 
-    var userData = {
-      fullName,
-      email,
-      uid,
-    };
-    dispatch(setUser(userData));
   } catch (error) {
     console.log(error);
   }
@@ -41,23 +40,8 @@ export var signup = ({ email, password, fullName }) => async (dispatch) => {
 export var signin = ({ email, password }) => async (dispatch) => {
   try {
     //sign in user
-    var {
-      user: { uid },
-    } = await auth.signInWithEmailAndPassword(email, password);
+     await auth.signInWithEmailAndPassword(email, password);
 
-    //fetch data from firestore
-    //we changed email name because variable 'email' initialized again and the upper one got null
-    var loggedUser = await firestore.collection("users").doc(uid).get();
-    var { fullName, email: userEmail } = loggedUser.data();
-
-    //set to redux store
-    var userData = {
-      fullName,
-      email: userEmail,
-      uid,
-    };
-    dispatch(setUser(userData));
-    console.log(userData);
   } catch (error) {
     console.log(error);
   }
@@ -66,8 +50,56 @@ export var signin = ({ email, password }) => async (dispatch) => {
 export var signout = () => async (dispatch) => {
   try {
     await auth.signOut();
-    dispatch(removerUser());
+    
   } catch (error) {
     console.log(error);
   }
+};
+
+export var googleSignin = () => async (dispatch) => {
+  try {
+    //signin user in irebase auth using google provider
+    //also saved the photo url of google signed in person
+    var {
+      additionalUserInfo: { isNewUser },
+      user: { displayName, email, photoURL, uid },
+    } = await auth.signInWithPopup(googleAuthProvider);
+    //checking for new user
+    if (isNewUser) {
+      //save user data to firestore
+      var userInfo = {
+        fullName: displayName,
+        email,
+        createdAt: serverTimestamp(),
+      };
+      console.log(userInfo);
+      await firestore.collection("users").doc(uid).set(userInfo);
+    }
+   
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//auth listener for our App (centralized auth listener)
+//onauthstatechange accepts a function which tells if user is signed in or not
+export var   = () => async (dispatch) => {
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      var { uid } = user;
+      //fetch data from firestore
+      var query = await firestore.collection("users").doc(uid).get();
+      var { fullName, email } = query.data();
+
+      //set to redux store
+      var userData = {
+        fullName,
+        email,
+        uid,
+      };
+      dispatch(setUser(userData));
+    } else {
+      dispatch(removerUser());
+    }
+  });
 };

@@ -16,7 +16,10 @@ firebase.initializeApp(firebaseConfig);
 
 export var auth = firebase.auth();
 export var firestore = firebase.firestore();
-// export var Provider = new firebase.auth.GoogleAuthProvider()
+export var googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+googleAuthProvider.setCustomParameters({
+  prompt: 'select_account'
+})
 export var serverTimestamp = () => firebase.firestore.FieldValue.serverTimestamp()
 
 export default firebase;

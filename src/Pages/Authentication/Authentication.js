@@ -2,6 +2,7 @@ import React from "react";
 import SignupForm from "./../../Components/SignupForm/SignupForm";
 import SigninForm from "./../../Components/SigninForm/SigninForm";
 import Signout from "./../../Components/Signout/Signout";
+import GoogleSignin from './../../Components/GoogleSignin/GoogleSignin';
 
 const Authentication = () => {
   return (
@@ -10,6 +11,7 @@ const Authentication = () => {
       <SigninForm />
       <SignupForm />
       <Signout />
+      <GoogleSignin/>
     </div>
   );
 };

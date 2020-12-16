@@ -14,6 +14,7 @@ const SigninForm = ({signin}) => {
         }
         signin(cred)
         
+        console.log(email, password)
         // console.log(email)
         // console.log(password)
     }
