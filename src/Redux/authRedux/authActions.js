@@ -75,6 +75,7 @@ export var googleSignin = () => async (dispatch) => {
       console.log(userInfo);
       await firestore.collection("users").doc(uid).set(userInfo);
     }
+    console.log(photoURL)
    
   } catch (error) {
     console.log(error);
@@ -83,7 +84,7 @@ export var googleSignin = () => async (dispatch) => {
 
 //auth listener for our App (centralized auth listener)
 //onauthstatechange accepts a function which tells if user is signed in or not
-export var   = () => async (dispatch) => {
+export var authListener = () => async (dispatch) => {
   auth.onAuthStateChanged(async (user) => {
     if (user) {
       var { uid } = user;

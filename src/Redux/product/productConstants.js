@@ -1,0 +1,1 @@
+export var SET_PRODUCT = 'SET_PRODUCT'

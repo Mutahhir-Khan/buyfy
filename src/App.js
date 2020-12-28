@@ -8,21 +8,28 @@ import Checkout from "./Pages/Checkout/Checkout";
 import { useEffect } from "react";
 import { connect } from 'react-redux';
 import { authListener } from './Redux/authRedux/authActions';
+import Test from './Pages/Test/Test';
+import Navbar from './Components/Navbar/Navbar';
 
 
-var App = ({authListener}) => {
+var App = ({ authListener }) => {
   useEffect(() => {
     authListener()
-    
+
   }, [authListener])
   return (
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/authentication" component={Authentication} />
-      <Route path="/categories" component={Category} />
-      <Route path="/category-products" component={CategoryProducts} />
-      <Route path="/checkout" component={Checkout} />
-    </Switch>
+    <div>
+      <Navbar/>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/authentication" component={Authentication} />
+        <Route path="/categories" component={Category} />
+        <Route path="/category-products" component={CategoryProducts} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/test" component={Test} />
+      </Switch>
+    </div>
+
   );
 };
 

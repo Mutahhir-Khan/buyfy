@@ -1,0 +1,22 @@
+.navbar{
+    height: 12vh;
+    background: lightslategrey;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* place-items: center; */
+    align-items: center;
+}
+a{
+    text-decoration: none;
+    color: wheat;
+}
+.logo{
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+.navCompoenetItems{
+    display: flex;
+}
+.navitem{
+    flex: 1;
+}
