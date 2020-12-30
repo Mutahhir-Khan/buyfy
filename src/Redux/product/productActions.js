@@ -1,7 +1,7 @@
 import { firestore, serverTimestamp, storage } from './../../Firebase/Firebase';
 import { v4 as uuid } from 'uuid'
 import { uploadImages } from '../../Utility/Utility';
-import { SET_PRODUCT } from './productConstants';
+import { CLEAR_PRODUCTS, SET_PRODUCT } from './productConstants';
 
 
 export var uploadProduct = (productObj) => async () => {
@@ -82,5 +82,37 @@ export var fetchProducts = () => async (dispatch) => {
         })
     } catch (error) {
         console.log(error)
+    }
+}
+
+
+export var fetchCategoryProducts = (category) => async (dispatch) => {
+    try {
+        console.log(category)
+        var query = await firestore.collection("products").where("category","==",category).get()
+        var products = []
+        query.docs.forEach((doc) => {
+            products.push(doc.data())
+        })
+        dispatch({
+            type: SET_PRODUCT,
+            payload: {
+                products //array
+            }
+        })
+    } catch (error) {
+        console.log(error)
+
+    }
+}
+
+export var clearProducts = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: CLEAR_PRODUCTS,
+        })
+    } catch (error) {
+        console.log(error)
+        
     }
 }
