@@ -16,7 +16,12 @@ a{
 }
 .navCompoenetItems{
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .navitem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1;
 }

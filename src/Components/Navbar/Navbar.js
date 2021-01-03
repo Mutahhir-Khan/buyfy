@@ -21,6 +21,11 @@ const Navbar = () => {
                         <h1>AUTH</h1>
                     </Link>
                 </div>
+                <div className="navitem">
+                    <Link to="/test">
+                        <h1>TEST</h1>
+                    </Link>
+                </div>
             </div>
         </div>
     );

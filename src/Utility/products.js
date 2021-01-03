@@ -35,8 +35,6 @@ export var categorizeProducts = (productsArr) => {
 
 
 export var productAdditionInCart = (existingProducts, incomingProduct) => {
-  // console.log(existingProducts + "dddddddd")
-  // console.log(typeof (existingProducts))
   var exist = existingProducts.some(existingProduct => existingProduct.id === incomingProduct.id)
   if (!exist) {
     console.log([...existingProducts, { ...incomingProduct, cartQuantity: 1 }])
@@ -52,11 +50,8 @@ export var productAdditionInCart = (existingProducts, incomingProduct) => {
           cartQuantity: existingProduct.cartQuantity + 1
         }
       } else return existingProduct
-
     })
-
   }
-
 }
 
 
