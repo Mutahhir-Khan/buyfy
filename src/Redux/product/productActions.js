@@ -116,3 +116,14 @@ export var clearProducts = () => async (dispatch) => {
         
     }
 }
+
+//  used in product.js page
+export var fetchParticularProduct = (productId) => async (dispatch) => {
+    try {
+        var query = firestore.collection("products").doc(productId).get()
+        var product = (await query).data()
+        return  product
+    } catch (error) {
+        console.log(error)
+    }
+}

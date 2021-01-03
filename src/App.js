@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { authListener } from './Redux/authRedux/authActions';
 import Test from './Pages/Test/Test';
 import Navbar from './Components/Navbar/Navbar';
+import Product from './Pages/Product/Product';
 
 
 var App = ({ authListener }) => {
@@ -25,6 +26,7 @@ var App = ({ authListener }) => {
         <Route path="/authentication" component={Authentication} />
         <Route path="/categories" component={Category} />
         <Route path="/category-products/:category" component={CategoryProducts} />
+        <Route path="/product/:productId" component={Product}/>
         <Route path="/checkout" component={Checkout} />
         <Route path="/test" component={Test} />
       </Switch>
