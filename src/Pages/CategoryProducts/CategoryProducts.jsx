@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux';
 import ProductCard from '../../Components/ProductCard/ProductCard';
-import { fetchCategoryProducts, clearProducts } from './../../Redux/product/productActions';
+import { fetchCategoryProducts, clearProducts } from '../../Redux/product/productActions';
 
 const CategoryProducts = ({products,clearProducts, fetchCategoryProducts, match: {params: {category}}}) => {
     // console.log(products)

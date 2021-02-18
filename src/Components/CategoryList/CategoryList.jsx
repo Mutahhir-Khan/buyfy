@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import CategoryListItem from '../CategoryListItem/CategoryListItem';
-import { fetchProducts } from './../../Redux/product/productActions';
-import { categorizeProducts } from './../../Utility/products';
+import { fetchProducts } from '../../Redux/product/productActions';
+import { categorizeProducts } from '../../Utility/products';
 
 const CategoryList = ({fetchProducts, categories}) => {
     // console.log(categories)

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import CategoryList from './../../Components/CategoryList/CategoryList';
+import CategoryList from '../../Components/CategoryList/CategoryList';
 // import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { clearProducts } from './../../Redux/product/productActions';
+import { clearProducts } from '../../Redux/product/productActions';
 
 
 

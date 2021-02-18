@@ -1,9 +1,9 @@
 import React from 'react'
-import CartList from './../CartList/CartList';
-import Checkout from './../../Pages/Checkout/Checkout';
+import CartList from '../CartList/CartList';
+import Checkout from '../../Pages/Checkout/Checkout';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { generateOrder } from './../../Redux/order/orderActions';
+import { generateOrder } from '../../Redux/order/orderActions';
 
 const Cart = ({ generateOrder }) => {
     return (

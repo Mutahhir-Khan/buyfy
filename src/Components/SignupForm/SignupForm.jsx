@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux';
-import { signup } from './../../Redux/authRedux/authActions';
+import { signup } from '../../Redux/authRedux/authActions';
 
 const SignupForm = ({signup}) => {
     const [fullName, setfullName] = useState("")

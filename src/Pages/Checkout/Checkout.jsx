@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import CheckoutList from '../../Components/CheckoutList/CheckoutList'
-import { totalAmount } from './../../Utility/checkout';
+import { totalAmount } from '../../Utility/checkout';
 import { connect } from 'react-redux';
-import OrderForm from './../../Components/OrderForm/OrderForm';
+import OrderForm from '../../Components/OrderForm/OrderForm';
 
 const Checkout = ({total}) => {
     const [shipFormShown, setshipFormShown] = useState(false)

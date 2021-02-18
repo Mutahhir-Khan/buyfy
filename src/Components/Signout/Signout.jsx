@@ -1,5 +1,5 @@
 import React from "react";
-import { signout } from "./../../Redux/authRedux/authActions";
+import { signout } from "../../Redux/authRedux/authActions";
 import { connect } from 'react-redux';
 
 const Signout = ({ signout }) => {

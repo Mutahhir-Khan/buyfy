@@ -1,5 +1,5 @@
 import React from 'react'
-import CartListItem from './../CartListItem/CartListItem';
+import CartListItem from '../CartListItem/CartListItem';
 import { connect } from 'react-redux';
 
 const CartList = ({cartItems}) => {

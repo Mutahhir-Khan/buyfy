@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux';
-import { uploadProduct } from './../../Redux/product/productActions';
+import { uploadProduct } from '../../Redux/product/productActions';
 import { uploadImages } from '../../Utility/Utility';
-import Cart from './../../Components/Cart/Cart';
+import Cart from '../../Components/Cart/Cart';
+import Header from './../../Components/Header/Header';
+import Paragraph from './../../Components/Paragraph/Paragraph';
+import Button from './../../Components/Button/Button';
 
 const Test = ({uploadProduct, uploadImages}) => {
     // var [category, setcategory] = useState("")
@@ -26,7 +29,8 @@ const Test = ({uploadProduct, uploadImages}) => {
     //     uploadProduct(productObj)
     // }
     return (
-        <div>
+        /* 1em = 10px  */
+        <div style={{fontSize: "62.5%"}}> 
             <h1>Test page</h1>
             {/* <form onSubmit={handleSubmit}>
                 <input onChange={(e) => setcategory(e.target.value)} type="text" value={category} placeholder="category"/> <br/>
@@ -38,6 +42,15 @@ const Test = ({uploadProduct, uploadImages}) => {
                 <button>ADD PRODUCT</button>
             </form> */}
             <Cart/>
+            <Header fontWeight="bold" fontSize={32}>This is  my Header</Header>
+            <Header fontWeight="regular" fontSize={16}>This is  my 2nd  Header</Header>
+            <Header fontWeight="regular" fontSize={16} color="darkgreen">This is  my 2nd  Header</Header>
+            
+            <Paragraph fontWeight="bold" fontSize={32}>This is  my Paragraph</Paragraph>
+            <Paragraph fontWeight="regular" fontSize={16}>This is  my 2nd  Paragraph</Paragraph>
+            <Paragraph fontWeight="regular" fontSize={16} color="darkgreen">This is  my 2nd  Paragraph</Paragraph>
+
+            <Button  fontWeight="semi-bold" >Click Me! </Button>
         </div>
     )
 }
