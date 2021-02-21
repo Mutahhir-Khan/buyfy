@@ -1,9 +1,12 @@
 import React from 'react'
+import "./Home.css"
+
 
 const Home = () => {
     return (
-        <div>
-            <h1>Home Page</h1>
+        <div className="home">
+                <div className="homeLeft center">LEFT</div>
+                <div className="homeRight center">RIGHT</div>
         </div>
     )
 }

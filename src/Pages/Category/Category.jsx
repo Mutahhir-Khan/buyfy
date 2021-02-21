@@ -1,33 +1,31 @@
-import React, { useEffect } from 'react'
-import CategoryList from '../../Components/CategoryList/CategoryList';
+import React, { useEffect } from "react";
+import CategoryList from "../../Components/CategoryList/CategoryList";
 // import { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { clearProducts } from '../../Redux/product/productActions';
-
-
+import { connect } from "react-redux";
+import { clearProducts } from "../../Redux/product/productActions";
+import "./Category.css";
 
 const Category = ({ clearProducts }) => {
-    useEffect(() => {
-        return () => {
-            /*
+  useEffect(() => {
+    return () => {
+      /*
                 glitch arha tha us waja se pehly redux store se state remove kari then 
                 categoryProducts page pe jaa kar new satet set krai.
             */
-            clearProducts()
-        }
-    }, [])
+      clearProducts();
+    };
+  }, []);
 
-    return (
-        <div>
-            <h1>Category Page</h1>
-            <CategoryList />
-        </div>
-    )
-}
-
+  return (
+    <div className="category-page">
+      <h1>Category Page</h1>
+      <CategoryList />
+    </div>
+  );
+};
 
 var actions = {
-    clearProducts,
-}
+  clearProducts,
+};
 
-export default connect(null, actions)(Category)
+export default connect(null, actions)(Category);

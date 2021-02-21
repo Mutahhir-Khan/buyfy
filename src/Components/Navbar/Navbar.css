@@ -1,32 +1,16 @@
 .navbar{
-    height: 12vh;
-    background: lightslategrey;
+    width: 100vw;
+    height: var(--navbar-height);
+    background: lightgray;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* place-items: center; */
+    grid-template-columns: 1fr repeat(3, min-content);
     align-items: center;
+    column-gap: 20px;
+    padding: 0px 80px;
+    font-size: 62.5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
 }
-a{
-    text-decoration: none;
-    color: rgb(1, 95, 102);
-    /* outline: brown; */
-}
-a:hover {
-    border-bottom: 1px solid brown;
 
-}
-.logo{
-    padding: 0 30px;
-    box-sizing: border-box;
-}
-.navCompoenetItems{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.navitem{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-}

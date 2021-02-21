@@ -5,6 +5,7 @@ import {
   serverTimestamp,
 } from "./../../Firebase/Firebase";
 import { REMOVE_USER, SET_USER } from "./authConstants";
+import history from './../../History/history';
 
 //functions move to reducer
 export var setUser = (user) => ({
@@ -32,6 +33,9 @@ export var signup = ({ email, password, fullName }) => async (dispatch) => {
     // console.log(userInfo)
     await firestore.collection("users").doc(uid).set(userInfo);
 
+    //navigate to home page
+    history.push("/")
+
   } catch (error) {
     console.log(error);
   }
@@ -42,6 +46,9 @@ export var signin = ({ email, password }) => async (dispatch) => {
     //sign in user
      await auth.signInWithEmailAndPassword(email, password);
 
+    //navigate to home page
+    history.push("/")
+      
   } catch (error) {
     console.log(error);
   }
