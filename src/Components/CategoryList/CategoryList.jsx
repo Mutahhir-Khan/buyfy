@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CategoryListItem from '../CategoryListItem/CategoryListItem';
 import { fetchProducts } from '../../Redux/product/productActions';
 import { categorizeProducts } from '../../Utility/products';
+import "./CategoryList.css"
 
 const CategoryList = ({fetchProducts, categories}) => {
     // console.log(categories)
@@ -11,8 +12,8 @@ const CategoryList = ({fetchProducts, categories}) => {
         fetchProducts()        
     }, [])
     return (
-        <div>
-            <h1>category List</h1>
+        <div className="category-list">
+            {/* <h1>category List</h1> */}
             {/* //spread the object here as soul pair */}
             {categories.map(category => <CategoryListItem key={category.category} {...category}/>)} 
         </div>
@@ -20,7 +21,7 @@ const CategoryList = ({fetchProducts, categories}) => {
 }
 
 var actions = {
-    fetchProducts
+    fetchProducts 
 }
 var mapState = (state) => ({
     categories: categorizeProducts(state.products)

@@ -18,7 +18,7 @@ const ProductCard = ({ addToCart, removeFromCart, deleteFromCart, ...product }) 
             </div>
 
             <div style={{background: `url(${CoverPhoto})`, backgroundSize: "100% 100%, cover", backgroundRepeat: "no-repeat" }} className="product_card_image"></div>
-            <Header style={{alignSelf: "flex-start"}} fontSize={18} fontWeight="bold" >{title}</Header>
+            <Header style={{alignSelf: "flex-start"}} fontSize={15} fontWeight="bold" >{title}</Header>
             <Header style={{alignSelf: "flex-start"}} fontSize={14} fontWeight="regular">${cost}</Header>
             </div>
         </div>

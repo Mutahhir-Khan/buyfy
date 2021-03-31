@@ -17,8 +17,8 @@ const Category = ({ clearProducts }) => {
   }, []);
 
   return (
-    <div className="category-page">
-      <h1>Category Page</h1>
+    <div className="category">
+      {/* <h1>Category Page</h1> */}
       <CategoryList />
     </div>
   );
