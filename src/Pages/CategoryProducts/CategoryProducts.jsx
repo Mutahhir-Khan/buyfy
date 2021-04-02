@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { connect } from 'react-redux';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import { fetchCategoryProducts, clearProducts } from '../../Redux/product/productActions';
+import "./CategoryProducts.css"
 
 const CategoryProducts = ({products,clearProducts, fetchCategoryProducts, match: {params: {category}}}) => {
     // console.log(products)
@@ -14,9 +15,12 @@ const CategoryProducts = ({products,clearProducts, fetchCategoryProducts, match:
     }, [])
 
     return (
-        <div>
-            <h1> {category} Products Page</h1>
+        <div className="category-products">
+            <div className="category-product-list">
+
+            <h1 className="category-name additional-category-name"> {category} </h1>
             {products.map(product => <ProductCard key={product.title} {...product} />)}
+            </div>
         </div>
     )
 }
