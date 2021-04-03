@@ -3,7 +3,7 @@ import CheckoutList from '../CheckoutList/CheckoutList';
 
 const Checkout = () => {
     return (
-        <div>
+        <div >
             <h1> CHECKOUT</h1>
             <CheckoutList/>
         </div>
