@@ -15,16 +15,17 @@ const CheckoutListItems = ({
   deleteFromCart,
   ...product
 }) => {
-  var { title, cost, cartQuantity, id } = product;
-  console.log(title, cost, cartQuantity, id);
+  var { title, cost, cartQuantity, CoverPhoto, id } = product;
+  console.log(title, cost, cartQuantity, CoverPhoto, id);
   return (
     <div className="checkout-list-item">
       <div className="checkout-item-product">
-        <div className="checkout-item-product-image"></div>
-        <Paragraph>my product</Paragraph>
+        <div className="checkout-item-product-image" style={{background:`url(${CoverPhoto}) no-repeat center center / 100%`}}></div>
+        <Paragraph>{title}</Paragraph>
       </div>
       <div className="checkout-item-quantity center">
         <Button
+          onClick={() => (addToCart(product))}
           style={{
             borderTopLeftRadius: "50%",
             borderBottomLeftRadius: "50%",
@@ -34,8 +35,9 @@ const CheckoutListItems = ({
         >
           +
         </Button>
-        <Button fontWeight="bold">3</Button>
+        <Button fontWeight="bold">{cartQuantity}</Button>
         <Button
+          onClick={() => removeFromCart(id)}
           style={{
             borderTopRightRadius: "50%",
             borderBottomRightRadius: "50%",
@@ -47,8 +49,8 @@ const CheckoutListItems = ({
           -
         </Button>
       </div>
-      <div className="checkout-item-price center"><Paragraph  fontSize={20} fontWeight="bold">$ 240</Paragraph></div>
-      <div className="checkout-item-cancellation center"><Paragraph style={{cursor: "pointer"}} fontSize={20} fontWeight="bold">X</Paragraph></div>
+      <div className="checkout-item-price center"><Paragraph  fontSize={20} fontWeight="bold">$ {cost}</Paragraph></div>
+      <div className="checkout-item-cancellation center"><Paragraph onClick={() => deleteFromCart(id)} style={{cursor: "pointer"}} fontSize={20} fontWeight="bold">X</Paragraph></div>
       {/* *************************
             <h1>{title} - {cost} - <button onClick={() => deleteFromCart(id)}> X </button></h1>
             <h2><button onClick={() => (addToCart(product))}> + </button> {cartQuantity} <button onClick={() => removeFromCart(id)}> - </button></h2> */}

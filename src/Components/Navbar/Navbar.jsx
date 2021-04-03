@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { signout } from './../../Redux/authRedux/authActions';
 import Cart from "../Cart/Cart";
 
-const MenuItem = ({ children, to="#", ...restProps }) => (
+export const MenuItem = ({ children, to="#", ...restProps }) => (
   <div>
     <div {...restProps} className="menuItem">
       <Link  to={to}>

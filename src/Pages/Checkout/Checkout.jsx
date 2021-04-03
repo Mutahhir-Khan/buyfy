@@ -16,7 +16,7 @@ const Checkout = ({total}) => {
                 <Header fontWeight="bold" fontSize={20}>Shopping Cart</Header>
                 <CheckoutList/>
                 <div className="checkout-bottom-content">
-                    <Header fontSize={24} fontWeight="bold">Total - $24</Header>
+                    <Header fontSize={24} fontWeight="semi-bold">Amount To Pay: &nbsp; <b>{`$${total}`}</b></Header>
                     <Button style={{justifySelf:"end"}}> Proceed n Pay</Button>
                 </div>
                 {/* <h3>Total Amount {`$${total}`}</h3> */}

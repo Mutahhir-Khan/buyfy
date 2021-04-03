@@ -7,6 +7,7 @@ const Paragraph = ({
   fontWeight = "regular",
   color = "black",
   style = {},
+  ...restProps
 }) => { 
   var fontWeightCal = (weightStr) => {
     switch (weightStr) {
@@ -26,7 +27,7 @@ const Paragraph = ({
 var fontWeightValue = fontWeightCal(fontWeight);
 var fontSizeValue = fontSize/10
   return (
-    <div className="paragraph" style={{ fontWeight: fontWeightValue, fontSize: `${fontSizeValue}em`, color, ...style }}>
+    <div {...restProps} className="paragraph" style={{ fontWeight: fontWeightValue, fontSize: `${fontSizeValue}em`, color, ...style }}>
       {children}
     </div>
   );
