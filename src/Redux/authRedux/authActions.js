@@ -34,10 +34,11 @@ export var signup = ({ email, password, fullName }) => async (dispatch) => {
     await firestore.collection("users").doc(uid).set(userInfo);
 
     //navigate to home page
-    history.push("/")
+    // history.push("/")
 
   } catch (error) {
     console.log(error);
+    alert(error.message)
   }
 };
 
@@ -47,7 +48,7 @@ export var signin = ({ email, password }) => async (dispatch) => {
      await auth.signInWithEmailAndPassword(email, password);
 
     //navigate to home page
-    history.push("/")
+    // history.push("/")
       
   } catch (error) {
     console.log(error);
@@ -65,7 +66,7 @@ export var signout = () => async (dispatch) => {
 
 export var googleSignin = () => async (dispatch) => {
   try {
-    //signin user in irebase auth using google provider
+    //signin user in firebase auth using google provider
     //also saved the photo url of google signed in person
     var {
       additionalUserInfo: { isNewUser },
@@ -105,6 +106,9 @@ export var authListener = () => async (dispatch) => {
         email,
         uid,
       };
+      //navigate to  home page
+      if(userData)  history.push("/");
+
       dispatch(setUser(userData));
     } else {
       dispatch(removerUser());
