@@ -6,8 +6,9 @@ import OrderForm from '../../Components/OrderForm/OrderForm';
 import "./Checkout.css"
 import Header from './../../Components/Header/Header';
 import Button from './../../Components/Button/Button';
+import { openModal } from './../../Redux/modal/modalActions';
 
-const Checkout = ({total}) => {
+const Checkout = ({total, openModal}) => {
     const [shipFormShown, setshipFormShown] = useState(false)
     return (
         <div className="checkout-page-container">
@@ -17,7 +18,12 @@ const Checkout = ({total}) => {
                 <CheckoutList/>
                 <div className="checkout-bottom-content">
                     <Header fontSize={24} fontWeight="semi-bold">Amount To Pay: &nbsp; <b>{`$${total}`}</b></Header>
-                    <Button style={{justifySelf:"end"}}> Proceed n Pay</Button>
+                    <Button
+                     onClick={() =>
+                        openModal({ modalType: "addressFormModal"  })
+                      }
+                     style={{justifySelf:"end"}}> 
+                     Proceed & Pay</Button>
                 </div>
                 {/* <h3>Total Amount {`$${total}`}</h3> */}
                 {/* <button onClick={() => setshipFormShown(!shipFormShown)}>PROCEDD & PAY </button> --{total} */}
@@ -31,4 +37,7 @@ var mapState = (state) => ({
     total: totalAmount(state.cart)
 })
 
-export default connect(mapState)(Checkout)
+var actions = {
+    openModal
+}
+export default connect(mapState, actions)(Checkout)

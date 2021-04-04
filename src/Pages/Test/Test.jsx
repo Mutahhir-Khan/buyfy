@@ -70,6 +70,13 @@ const Test = ({ uploadProduct, uploadImages, openModal }) => {
       >
         open error modal
       </Button>
+      <Button
+        onClick={() =>
+          openModal({ modalType: "addressFormModal"  })
+        }
+      >
+        open Address modal
+      </Button>
     </div>
   );
 };

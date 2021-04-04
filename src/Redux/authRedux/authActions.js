@@ -34,7 +34,7 @@ export var signup = ({ email, password, fullName }) => async (dispatch) => {
     await firestore.collection("users").doc(uid).set(userInfo);
 
     //navigate to home page
-    // history.push("/")
+    history.push("/")
 
   } catch (error) {
     console.log(error);
@@ -48,7 +48,7 @@ export var signin = ({ email, password }) => async (dispatch) => {
      await auth.signInWithEmailAndPassword(email, password);
 
     //navigate to home page
-    // history.push("/")
+    history.push("/")
       
   } catch (error) {
     console.log(error);
@@ -82,6 +82,8 @@ export var googleSignin = () => async (dispatch) => {
       };
       console.log(userInfo);
       await firestore.collection("users").doc(uid).set(userInfo);
+      //navigate to home page
+      history.push("/")
     }
     console.log(photoURL)
    
@@ -107,7 +109,7 @@ export var authListener = () => async (dispatch) => {
         uid,
       };
       //navigate to  home page
-      if(userData)  history.push("/");
+      // if(userData)  history.push("/");
 
       dispatch(setUser(userData));
     } else {
