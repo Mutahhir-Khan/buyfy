@@ -8,6 +8,7 @@ import history from "./History/history";
 import ModalManager from "./Components/ModalManager/ModalManager";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./Redux/store";
+import CodeSplittedApp from './CodeSplittedApp';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +16,8 @@ ReactDOM.render(
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <ModalManager />
-          <App />
+          {/* <App /> */}
+          <CodeSplittedApp/>
         </PersistGate>
       </Provider>
     </Router>
