@@ -31,6 +31,7 @@ var CodeSplittedApp = ({ authListener }) => {
         <div className="pagesContainer">
           <Suspense fallback={<div>Loading....</div>}>
             <Route exact path="/" component={Home} />
+
             <Route path="/authentication" component={Authentication} />
             <Route path="/categories" component={Category} />
             <Route path="/category-products/:category"component={CategoryProducts}/>
