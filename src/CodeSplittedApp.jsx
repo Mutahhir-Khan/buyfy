@@ -11,14 +11,14 @@ import "./App.css";
 import Navbar from "./Components/Navbar/Navbar";
 import { connect } from "react-redux";
 import { authListener } from "./Redux/authRedux/authActions";
-
-var Home = lazy(() => import("./Pages/Home/Home"));
-var Authentication = lazy(() => import("./Pages/Authentication/Authentication"));
-var Category = lazy(() => import("./Pages/Category/Category"));
-var CategoryProducts = lazy(() => import("./Pages/CategoryProducts/CategoryProducts"));
-var Checkout = lazy(() => import("./Pages/Checkout/Checkout"));
-var Product = lazy(() => import("./Pages/Product/Product"));
-var Test = lazy(() => import("./Pages/Test/Test"));
+ 
+var Home = lazy(() => import("./Pages/Home/Home")); //dynamic import 
+var Authentication = lazy(() => import("./Pages/Authentication/Authentication"));//dynamic import
+var Category = lazy(() => import("./Pages/Category/Category"));//dynamic import
+var CategoryProducts = lazy(() => import("./Pages/CategoryProducts/CategoryProducts"));//dynamic import
+var Checkout = lazy(() => import("./Pages/Checkout/Checkout"));//dynamic import
+var Product = lazy(() => import("./Pages/Product/Product"));//dynamic import
+var Test = lazy(() => import("./Pages/Test/Test"));//dynamic import
 
 var CodeSplittedApp = ({ authListener }) => {
   useEffect(() => {

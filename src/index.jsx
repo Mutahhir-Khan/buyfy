@@ -16,8 +16,8 @@ ReactDOM.render(
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <ModalManager />
-          {/* <App /> */}
-          <CodeSplittedApp/>
+          <App />
+          {/* <CodeSplittedApp/> */}
         </PersistGate>
       </Provider>
     </Router>
