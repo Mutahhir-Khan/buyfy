@@ -17,14 +17,5 @@ service cloud.firestore {
     allow update: if isLogin() && resource.data.orderedBy;
     allow delete: if false;
     }
-      
-      
-      
-      
-      
-      
-      
-      
-    
   }
 }
