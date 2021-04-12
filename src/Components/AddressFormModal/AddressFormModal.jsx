@@ -4,8 +4,14 @@ import ModalContainer from "../ModalContainer/ModalContainer";
 import "./AddressFormModal.css";
 import { TextField } from "@material-ui/core";
 import Button from "./../Button/Button";
+import { connect } from 'react-redux';
+import { updateOrderInfo } from "./../../Redux/order/orderActions";
 
-const AddressFormModal = () => {
+const AddressFormModal = ({updateOrderInfo, cart, orderId}) => {
+  // orderId ye order Id withRouter ki madad se Checkout.jsx se nikali he, q k ye 
+  // addressForm aik modal he aur modal app k bhi upper laga hoa he uspe Route ya switch ya withRouter 
+  // kuch kaam nhi karega isliye parent se pass karai he modalProps me
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [fullAddress, setFullAddress] = useState("");
@@ -13,18 +19,19 @@ const AddressFormModal = () => {
 
   var handleSubmit = (e) => {
       e.preventDefault()
-      var shippingDetails = {
+      var addressInfo = {
           fullName,
           fullAddress,
           email,
-          phone
+          phone 
       }
       if (fullName && fullAddress && email && phone) {
-          console.log(shippingDetails)
+          console.log(addressInfo, orderId, cart)
+          updateOrderInfo(cart, orderId, addressInfo)
       }
       else alert("Please Fill out all the Fields ")
-      var addressFieldsDiv = document.querySelector(".address-fields")
-      console.log(addressFieldsDiv.childNodes)
+      //   var addressFieldsDiv = document.querySelector(".address-fields")
+      // console.log(addressFieldsDiv.childNodes)
   }
   return (
     <ModalContainer>
@@ -36,8 +43,8 @@ const AddressFormModal = () => {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               style={{ width: "100%", marginBottom:"1em" }}
-              className="password"
-              label="Password"
+              className="full-name"
+              label="Full Name"
             ></TextField>
             <TextField
               value={email}
@@ -52,15 +59,15 @@ const AddressFormModal = () => {
               value={fullAddress}
               onChange={(e) => setFullAddress(e.target.value)}
               style={{ width: "100%", marginBottom:"1em" }}
-              className="email"
-              label="Email"
+              className="full-address"
+              label="Full Address"
             ></TextField>
             <TextField
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               style={{ width: "100%", marginBottom:"1em" }}
-              className="password"
-              label="Password"
+              className="phone"
+              label="Phone No."
             ></TextField>
           </div>
         </div>
@@ -73,4 +80,12 @@ const AddressFormModal = () => {
   );
 };
 
-export default AddressFormModal;
+var mapState = (state) => ({
+  cart: state.cart
+})
+
+var actions = {
+  updateOrderInfo
+}
+
+export default connect(mapState, actions)(AddressFormModal);

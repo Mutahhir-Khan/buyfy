@@ -7,8 +7,10 @@ import "./Checkout.css"
 import Header from './../../Components/Header/Header';
 import Button from './../../Components/Button/Button';
 import { openModal } from './../../Redux/modal/modalActions';
+import { withRouter } from 'react-router';
 
-const Checkout = ({total, openModal}) => {
+const Checkout = ({total, openModal, orderId}) => {
+    // console.log(orderId)
     const [shipFormShown, setshipFormShown] = useState(false)
     return (
         <div className="checkout-page-container">
@@ -20,7 +22,7 @@ const Checkout = ({total, openModal}) => {
                     <Header fontSize={24} fontWeight="semi-bold">Amount To Pay: &nbsp; <b>{`$${total}`}</b></Header>
                     <Button
                      onClick={() =>
-                        openModal({ modalType: "addressFormModal"  })
+                        openModal({ modalType: "addressFormModal", modalProps: {orderId}  })
                       }
                      style={{justifySelf:"end"}}> 
                      Proceed & Pay</Button>
@@ -33,11 +35,12 @@ const Checkout = ({total, openModal}) => {
     )
 }
 
-var mapState = (state) => ({
+var mapState = (state, ownProps ) => ({
+    orderId: ownProps.match.params.orderId,
     total: totalAmount(state.cart)
 })
 
 var actions = {
     openModal
 }
-export default connect(mapState, actions)(Checkout)
+export default connect(mapState, actions)(withRouter(Checkout))

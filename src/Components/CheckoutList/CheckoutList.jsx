@@ -9,7 +9,7 @@ import "./CheckoutList.css"
 import { Link } from 'react-router-dom';
 
 const CheckoutList = ({cartItems}) => {
-    console.log(cartItems)
+    // console.log(cartItems)
     return (
         <div className="checkout-list">
             {/* <h1>cart list </h1> */}

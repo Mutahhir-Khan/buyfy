@@ -16,7 +16,7 @@ const CheckoutListItems = ({
   ...product
 }) => {
   var { title, cost, cartQuantity, CoverPhoto, id } = product;
-  console.log(title, cost, cartQuantity, CoverPhoto, id);
+  // console.log(title, cost, cartQuantity, CoverPhoto, id);
   return (
     <div className="checkout-list-item">
       <div className="checkout-item-product">

@@ -12,7 +12,7 @@ const Button = ({
   disabled = false,
   ...restProps
 }) => {
-  console.log(disabled);
+  // console.log(disabled);c
   return (
     <button
       {...restProps}

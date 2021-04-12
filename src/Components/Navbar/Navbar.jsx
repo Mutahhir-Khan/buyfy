@@ -24,7 +24,7 @@ export const MenuItem = ({ children, to="#", ...restProps }) => (
 
 const Navbar = ({auth, signout}) => {
   const [cartVisibility, setCartVisibility] = useState(false)
-  console.log(auth)
+  // console.log(auth)
   return (
     <div className="navbar">
       <MenuItem to="/">LOGO</MenuItem>
