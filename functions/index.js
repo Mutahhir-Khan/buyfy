@@ -40,3 +40,19 @@ exports.orderDelete = functions.firestore.document("/orders/{docId}").onDelete((
 
 
 //HTTPS trugger  (for making an API)
+exports.welcomeUser = functions.https.onRequest((req, res) => {
+    res.status(200).json({
+        msg: "welcome to my website "
+    })
+    return Promise.resolve;
+    
+})
+
+exports.sayHelloByName = functions.https.onRequest((req, res) => {
+    var data = req.body;
+    res.status(200).json({
+        msg: `hello ${data.name}! welcome to my website`,
+        email: `this is your email address: ${data.email}`
+    })
+    return Promise.resolve
+})
