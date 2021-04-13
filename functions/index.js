@@ -1,4 +1,10 @@
 const functions = require("firebase-functions");
+const stripe = require("stripe")("sk_test_51Ifio9FVd0QvRm2UGxUbE32SNHyaHWyE7TrZnTai7CXsoso8C8hNLuo6ujEKgG05yNAWBvhjCizQkMZfsMLGmCrP00hGzkYvFY")
+const admin = require("firebase-admin");
+const { queryByRole } = require("@testing-library/dom");
+
+admin.initializeApp()
+const firestore = admin.firestore();
 
 
 
@@ -57,9 +63,36 @@ exports.sayHelloByName = functions.https.onRequest((req, res) => {
     return Promise.resolve
 })
 
-exports.generateCheckoutSession = (orderId) => {
+// exports.generateCheckoutSession = (orderId) => {
+    // console.log(orderID)
+
     //fetch order
+    // var query = firestore.collection("orders").doc(orderId).get()
+    // var data = query.data()
+
     //perform calculation
     //generate stripe session
     //send back that session
-}
+// }
+
+exports.generateCheckoutSession = functions.https.onRequest( async (req, res) => {
+    try {
+        var {orderId} = req.body
+        //fetch order
+        var query = await firestore.collection("orders").doc(orderId).get()
+        var order = query.data()
+        res.status(200).json({
+            data:{
+                order
+            }
+        })
+        //perform calculation
+        //generate stripe session with that amount
+        //send back that session
+
+    } catch (error) {
+        res.status(401).json({
+            error
+        })  
+    }
+})
