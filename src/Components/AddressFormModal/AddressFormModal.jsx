@@ -26,8 +26,8 @@ const AddressFormModal = ({updateOrderInfo, cart, orderId}) => {
           phone 
       }
       if (fullName && fullAddress && email && phone) {
-          console.log(addressInfo, orderId, cart)
-          updateOrderInfo(cart, orderId, addressInfo)
+          // console.log(addressInfo, orderId, cart)
+          updateOrderInfo({cart, orderId, addressInfo})
       }
       else alert("Please Fill out all the Fields ")
       //   var addressFieldsDiv = document.querySelector(".address-fields")

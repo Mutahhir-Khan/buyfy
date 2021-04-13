@@ -56,3 +56,10 @@ exports.sayHelloByName = functions.https.onRequest((req, res) => {
     })
     return Promise.resolve
 })
+
+exports.generateCheckoutSession = (orderId) => {
+    //fetch order
+    //perform calculation
+    //generate stripe session
+    //send back that session
+}
