@@ -63,32 +63,46 @@ exports.sayHelloByName = functions.https.onRequest((req, res) => {
     return Promise.resolve
 })
 
-// exports.generateCheckoutSession = (orderId) => {
-    // console.log(orderID)
-
-    //fetch order
-    // var query = firestore.collection("orders").doc(orderId).get()
-    // var data = query.data()
-
-    //perform calculation
-    //generate stripe session
-    //send back that session
-// }
+var shapeCart = (cart) => {
+    return cart.map(({title, cost, CoverPhoto, cartQuantity}) => ({
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: title,
+                images: [CoverPhoto],
+              },
+              unit_amount: cost * 100, //in cents now
+            },
+            quantity: cartQuantity,
+    }))
+}
 
 exports.generateCheckoutSession = functions.https.onRequest( async (req, res) => {
     try {
-        var {orderId} = req.body
+        var {orderId} = JSON.parse(req.body)
+        console.log(orderId)
         //fetch order
         var query = await firestore.collection("orders").doc(orderId).get()
         var order = query.data()
-        res.status(200).json({
+
+        //shape cart according to stripe
+        var line_items = shapeCart(order.cart)
+
+        //generate stripe session
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items,
+            mode: 'payment',
+            success_url: `https://thelogicart.com/`,
+            cancel_url: `https://thelogicart.com/`,
+          });
+    
+          //send back that session to frontend
+        res.set({'Access-Control-Allow-Origin':'*'}).status(200).json({
             data:{
-                order
+                session
             }
         })
-        //perform calculation
-        //generate stripe session with that amount
-        //send back that session
 
     } catch (error) {
         res.status(401).json({

@@ -5,9 +5,9 @@ import "./AddressFormModal.css";
 import { TextField } from "@material-ui/core";
 import Button from "./../Button/Button";
 import { connect } from 'react-redux';
-import { updateOrderInfo } from "./../../Redux/order/orderActions";
+import { processOrder } from "./../../Redux/order/orderActions";
 
-const AddressFormModal = ({updateOrderInfo, cart, orderId}) => {
+const AddressFormModal = ({processOrder, cart, orderId}) => {
   // orderId ye order Id withRouter ki madad se Checkout.jsx se nikali he, q k ye 
   // addressForm aik modal he aur modal app k bhi upper laga hoa he uspe Route ya switch ya withRouter 
   // kuch kaam nhi karega isliye parent se pass karai he modalProps me
@@ -27,7 +27,7 @@ const AddressFormModal = ({updateOrderInfo, cart, orderId}) => {
       }
       if (fullName && fullAddress && email && phone) {
           // console.log(addressInfo, orderId, cart)
-          updateOrderInfo({cart, orderId, addressInfo})
+          processOrder({cart, orderId, addressInfo})
       }
       else alert("Please Fill out all the Fields ")
       //   var addressFieldsDiv = document.querySelector(".address-fields")
@@ -85,7 +85,7 @@ var mapState = (state) => ({
 })
 
 var actions = {
-  updateOrderInfo
+  processOrder
 }
 
 export default connect(mapState, actions)(AddressFormModal);
