@@ -14,7 +14,7 @@ service cloud.firestore {
     match /orders/ {docId} {
     // ye request ka response me jo data jarha he wo he
     allow create, read:  if isLogin() && request.auth.uid == request.resource.data.orderedBy; 
-    allow update: if isLogin() && resource.data.orderedBy;
+    allow update: if isLogin() && request.auth.uid == resource.data.orderedBy;
     allow delete: if false;
     }
   }
