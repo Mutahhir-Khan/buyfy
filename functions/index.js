@@ -45,7 +45,7 @@ exports.orderDelete = functions.firestore.document("/orders/{docId}").onDelete((
 })
 
 
-//HTTPS trugger  (for making an API)
+//HTTPS trigger  (for making an API)
 exports.welcomeUser = functions.https.onRequest((req, res) => {
     res.status(200).json({
         msg: "welcome to my website "
@@ -79,16 +79,20 @@ var shapeCart = (cart) => {
 
 exports.generateCheckoutSession = functions.https.onRequest( async (req, res) => {
     try {
-        var {orderId} = JSON.parse(req.body)
+        console.log(JSON.parse(req.body))
+        var body = JSON.parse(req.body);
+        var {orderId} = body;
         console.log(orderId)
+
         //fetch order
         var query = await firestore.collection("orders").doc(orderId).get()
         var order = query.data()
+        console.log(order)
 
         //shape cart according to stripe
         var line_items = shapeCart(order.cart)
 
-        //generate stripe session
+        //generate stripe session   
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items,
@@ -97,16 +101,53 @@ exports.generateCheckoutSession = functions.https.onRequest( async (req, res) =>
             cancel_url: `https://thelogicart.com/`,
           });
     
-          //send back that session to frontend
-        res.set({'Access-Control-Allow-Origin':'*'}).status(200).json({
-            data:{
-                session
-            }
-        })
+    //send session to frontend
+    res.set({ 'Access-Control-Allow-Origin': '*' }).status(200).json({
+        data: {
+          session,
+        },
+    }); 
 
     } catch (error) {
-        res.status(401).json({
-            error
-        })  
+        console.log(error)
+        // res.status(401).json({
+        //     error
+        // })  
+    }
+})
+
+
+
+exports.stripeHook = functions.https.onRequest((req, res) => {
+    try {
+        //----------- security check ----------------
+        const sig = req.headers['stripe-signature'];
+        let event;
+        try {
+            //TODO: add endpoint here of firebase deployed function
+            event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret); 
+          }
+          catch (err) {
+            res.status(401).json({
+                error: error.message
+            })
+            console.log('signature does not matched')
+          }
+        //----------- security check ----------------
+        if(event.type === "checkout.session.completed"){
+            console.log('got payment.............')
+        }
+        else{
+            console.log("payment rejected........")
+        }
+        res.status(200).json({
+            msg: "response from server"
+        })
+          
+    } catch (error) {
+     res.status(401).json({
+            error: error.message
+        })    
+     console.log(error.message)
     }
 })

@@ -22,33 +22,39 @@ export var generateOrder = () => async (dispatch, getState) => {
   }
 };
 
-export var processOrder = ({ cart, orderId, addressInfo }) => async (dispatch, getState) => {
+export var processOrder = ({ orderId, addressInfo, cart }) => async (dispatch) => {
   try {
-      //TODO: to remove this hard coded orderId
+    console.log( cart, orderId, addressInfo )
     const stripe = await stripePromise;
 
-    var orderId = "dYShsFf99ubLRvYmNi9t"
-    var { auth } = getState();
-
-    var orderedBy = auth.uid;
+    
     await firestore.collection("/orders").doc(orderId).update({ cart, addressInfo});
     console.log("done updating");
+
+    //TODO: to remove this hard coded orderId
+    var tempOrderId = "9E3DoGTUvtejCqWS7QQ1"
+    console.log(JSON.stringify({ orderId:  tempOrderId}))
+
     //axios se post krne me body empty jarhi thi, tw tbhi fetch se kara
     // var data = await axios.get("http://localhost:5001/mutahhirbuyfy/us-central1/generateCheckoutSession", {orderId}) 
-    var response = await fetch("http://localhost:5001/mutahhirbuyfy/us-central1/generateCheckoutSession", {
-        method:"POST",
-        body: JSON.stringify({orderId})
-    })
-    var {data: {session}} = await response.json()
-    // console.log(session)
-    
-    // When the customer clicks on the button, redirect them to Checkout.
+    var response = await fetch(
+      "http://localhost:5001/mutahhirbuyfy/us-central1/generateCheckoutSession",
+      {
+        method: "POST",
+        body: JSON.stringify({ orderId: tempOrderId }),
+      }
+    );
+    console.log(response)
+    var { data: { session },} = await response.json();
+    console.log(session);
+
+    // When the customer clicks on the button, redirect them to stripe Checkout.
     const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
+      sessionId: session.id,
+    });
        
 
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };

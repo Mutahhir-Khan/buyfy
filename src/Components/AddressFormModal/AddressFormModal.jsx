@@ -4,9 +4,10 @@ import ModalContainer from "../ModalContainer/ModalContainer";
 import "./AddressFormModal.css";
 import { TextField } from "@material-ui/core";
 import Button from "./../Button/Button";
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { processOrder } from "./../../Redux/order/orderActions";
-
+import { connect } from 'react-redux';
+// 
 const AddressFormModal = ({processOrder, cart, orderId}) => {
   // orderId ye order Id withRouter ki madad se Checkout.jsx se nikali he, q k ye 
   // addressForm aik modal he aur modal app k bhi upper laga hoa he uspe Route ya switch ya withRouter 
@@ -26,7 +27,7 @@ const AddressFormModal = ({processOrder, cart, orderId}) => {
           phone 
       }
       if (fullName && fullAddress && email && phone) {
-          // console.log(addressInfo, orderId, cart)
+          console.log(addressInfo, orderId, cart)
           processOrder({cart, orderId, addressInfo})
       }
       else alert("Please Fill out all the Fields ")
