@@ -33,6 +33,7 @@ export var processOrder = ({ cart, orderId, addressInfo }) => async (dispatch, g
     var orderedBy = auth.uid;
     await firestore.collection("/orders").doc(orderId).update({ cart, addressInfo});
     console.log("done updating");
+    //axios se post krne me body empty jarhi thi, tw tbhi fetch se kara
     // var data = await axios.get("http://localhost:5001/mutahhirbuyfy/us-central1/generateCheckoutSession", {orderId}) 
     var response = await fetch("http://localhost:5001/mutahhirbuyfy/us-central1/generateCheckoutSession", {
         method:"POST",
