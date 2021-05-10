@@ -16,7 +16,7 @@ const Paragraph = ({
       case "regular":
         return 400;
       case "medium":
-        return 5600;
+        return 500;
       case "bold":
         return 700;
       default:
